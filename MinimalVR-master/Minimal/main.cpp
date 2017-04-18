@@ -25,6 +25,9 @@ limitations under the License.
 
 #include <Windows.h>
 
+#include "Window.h"
+
+
 #define __STDC_FORMAT_MACROS 1
 
 #define FAIL(X) throw std::runtime_error(X)
@@ -750,15 +753,19 @@ protected:
 		glClearColor(0.2f, 0.2f, 0.2f, 0.0f);
 		glEnable(GL_DEPTH_TEST);
 		ovr_RecenterTrackingOrigin(_session);
-		cubeScene = std::shared_ptr<ColorCubeScene>(new ColorCubeScene());
+		//cubeScene = std::shared_ptr<ColorCubeScene>(new ColorCubeScene());
+		Window::initialize_objects();
+		
 	}
 
 	void shutdownGl() override {
-		cubeScene.reset();
+		//cubeScene.reset();
+		Window::clean_up();
 	}
 
 	void renderScene(const glm::mat4 & projection, const glm::mat4 & headPose) override {
-		cubeScene->render(projection, glm::inverse(headPose));
+		//cubeScene->render(projection, glm::inverse(headPose));
+		Window::display_callback(projection, glm::inverse(headPose));
 	}
 };
 
