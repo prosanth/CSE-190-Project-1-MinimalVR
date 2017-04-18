@@ -25,7 +25,7 @@ limitations under the License.
 
 #include <Windows.h>
 
-#include "Window.h"
+#include "window.h"
 
 
 #define __STDC_FORMAT_MACROS 1
@@ -668,6 +668,7 @@ struct ColorCubeScene {
 	GLuint instanceCount;
 	oglplus::Buffer instances;
 
+
 	// VBOs for the cube's vertices and normals
 
 	const unsigned int GRID_SIZE{ 5 };
@@ -675,7 +676,7 @@ struct ColorCubeScene {
 public:
 	ColorCubeScene() : cube({ "Position", "Normal" }, oglplus::shapes::Cube()) {
 		using namespace oglplus;
-		try {
+		/*try {
 			// attach the shaders to the program
 			prog.AttachShader(
 				FragmentShader()
@@ -726,16 +727,16 @@ public:
 				instance_attr.Divisor(1);
 				instance_attr.Enable();
 			}
-		}
+		}*/
 	}
 
 	void render(const mat4 & projection, const mat4 & modelview) {
 		using namespace oglplus;
-		prog.Use();
+		/*prog.Use();
 		Uniform<mat4>(prog, "ProjectionMatrix").Set(projection);
 		Uniform<mat4>(prog, "CameraMatrix").Set(modelview);
 		vao.Bind();
-		cube.Draw(instanceCount);
+		cube.Draw(instanceCount);*/
 	}
 };
 
@@ -746,6 +747,7 @@ class ExampleApp : public RiftApp {
 
 public:
 	ExampleApp() { }
+	GLFWwindow* window2;
 
 protected:
 	void initGl() override {
@@ -754,6 +756,7 @@ protected:
 		glEnable(GL_DEPTH_TEST);
 		ovr_RecenterTrackingOrigin(_session);
 		//cubeScene = std::shared_ptr<ColorCubeScene>(new ColorCubeScene());
+		//window2 = Window::create_window(1000, 800);
 		Window::initialize_objects();
 		
 	}

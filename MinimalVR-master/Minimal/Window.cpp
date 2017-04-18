@@ -15,9 +15,9 @@
 #include "window.h"
 #include "../LibOVR/OVR_CAPI_GL.h" //include oculus sdk
 //#include "../" //include oculus avatar sdk
-#include "MoleculeSystem.cpp"
-#include "Molecule.cpp"
-#include "Factory.cpp"
+#include "MoleculeSystem.h"
+#include "Molecule.h"
+#include "Factory.h"
 
 const char* window_title = "C02";
 GLint shaderProgram;
@@ -138,7 +138,7 @@ void Window::display_callback(const glm::mat4 & projection, const glm::mat4 & mo
 	// Clear the color and depth buffers
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	if (!gameOver) {
-		glClearColor(0.0f, 0.0f, 1.0f, 0.0f); //set background color to dark blue
+		glClearColor(0.0f, 0.0f, 1.0f, 0.5f); //set background color to dark blue
 	}
 	else {
 		glClearColor(0.0f, 0.0f, 0.5f, 0.0f);
@@ -156,9 +156,10 @@ void Window::display_callback(const glm::mat4 & projection, const glm::mat4 & mo
 	factory->draw(shaderProgram);
 
 	//ovrAvatar_SetLeftControllerVisibility
+	
 
 	// Gets events, including input such as keyboard and mouse or window resizing
-	glfwPollEvents();
+	//glfwPollEvents();
 	// Swap buffers
 	//glfwSwapBuffers(window);
 }
